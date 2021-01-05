@@ -1,20 +1,16 @@
 import Hapi from '@hapi/hapi';
+import { routes } from './routes';
+import { db } from './database';
 
+let server;
 const start = async () =>{
-  const server = Hapi.server({
+  server = Hapi.server({
     port:8000,
     host:'localhost',
   })
 
-  server.route({
-    method:'GET',
-    path:'/hello',
-    handler:(req,h)=>{
-      console.log('hi')
-      return "hello"
-    }
-  })
-
+  routes.forEach(route=> server.route(route));
+  db.connect();
   await server.start();
   console.log(`Server is listening on port ${server.info.uri}`)
 }
@@ -23,5 +19,13 @@ process.on('unhandledRejection',err=>{
   console.log(err);
   process.exit(1);
 });
+
+process.on('SIGINT',async ()=>{
+  console.log('stopping server');
+  await server.stop({timeout:1000})
+  db.end();
+  console.log('stopped');
+  process.exit(0);
+})
 
 start();
