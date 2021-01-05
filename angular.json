@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "buy-sell"
+  "defaultProject": "buy-sell",
+  "cli": {
+    "analytics": false
+  }
 }
