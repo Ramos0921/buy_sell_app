@@ -1,6 +1,6 @@
 {
   "/api/*":{
-    "target":"http://localhost:8000",
+    "target":"https://buy-and-sell-d4049.wm.r.appspot.com",
     "secure":false,
     "logLevel":"debug",
     "changeOrigin":true

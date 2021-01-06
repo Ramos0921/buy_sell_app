@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import Hapi from '@hapi/hapi';
 import { routes } from './routes';
 import { db } from './database';
@@ -11,8 +13,8 @@ admin.initializeApp({
 let server;
 const start = async () =>{
   server = Hapi.server({
-    port:8000,
-    host:'localhost',
+    port:8080,
+    host:'0.0.0.0',
   })
 
   routes.forEach(route=> server.route(route));

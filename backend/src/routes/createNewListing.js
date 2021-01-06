@@ -14,7 +14,7 @@ export const createNewListingRoute ={
     const id = uuid();
     const { name='', description='', price=0}= req.payload;
     const views=0;
-
+  
     await db.query(`
       INSERT INTO listings (id, name, description, price, user_id, views)
         VALUES (?, ?, ?, ?, ?, ?);
